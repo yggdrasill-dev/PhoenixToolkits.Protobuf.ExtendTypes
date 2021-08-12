@@ -20,6 +20,9 @@ jobs:
       - name: Restore dependencies
         run: dotnet restore
 
+      - name: Build
+        run: dotnet build -c ${{env.BuildConfiguration}} --no-restore
+
       - name: Test
         run: dotnet test -c ${{env.BuildConfiguration}} --no-restore -l GitHubActions
 
