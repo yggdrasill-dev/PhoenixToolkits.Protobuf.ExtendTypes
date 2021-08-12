@@ -1,0 +1,12 @@
+<?xml version="1.0"?>
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+	<Target Name="_Before_Protobuf_CoreCompile"
+			Condition=" '$(DisableProtobufDesignTimeBuild)' != 'true' "
+			BeforeTargets="_Protobuf_CoreCompile">
+
+		<!-- Force output to the current directory if the user has set it to empty. -->
+		<PropertyGroup>
+			<Protobuf_StandardImportsPath>$(Protobuf_StandardImportsPath);$(Protobuf_PhoenixToolkitsImportsPath)</Protobuf_StandardImportsPath>
+		</PropertyGroup>
+	</Target>
+</Project>

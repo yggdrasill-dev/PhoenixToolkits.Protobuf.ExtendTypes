@@ -1,0 +1,38 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+	<PropertyGroup>
+		<TargetFramework>net5.0</TargetFramework>
+		<IsPackable>true</IsPackable>
+		<Authors>Phoenix</Authors>
+		<Company>Valhalla</Company>
+		<Description>擴充定義Guid、decimal之類的型別方便使用</Description>
+		<Version>0.0.1-alpha</Version>
+	</PropertyGroup>
+
+	<ItemGroup>
+		<Content Include="build\Grpc.Tools.props">
+			<Pack>true</Pack>
+			<PackagePath>build\</PackagePath>
+		</Content>
+		<Content Include="build\Grpc.Tools.targets">
+			<Pack>true</Pack>
+			<PackagePath>build\</PackagePath>
+		</Content>
+	</ItemGroup>
+
+	<ItemGroup>
+		<PackageReference Include="Google.Protobuf" Version="3.17.3" />
+		<PackageReference Include="Grpc.Tools" Version="2.38.1">
+			<PrivateAssets>all</PrivateAssets>
+			<IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+		</PackageReference>
+	</ItemGroup>
+
+	<ItemGroup>
+		<Content Include="Protos\wrappers.proto">
+			<PackagePath>build\native\include\phoenix\protobuf\</PackagePath>
+		</Content>
+		<Protobuf Include="Protos\wrappers.proto" GrpcServices="None" />
+	</ItemGroup>
+
+</Project>
