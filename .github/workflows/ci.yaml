@@ -1,0 +1,50 @@
+name: Build & Push
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+env:
+  BuildConfiguration: debug
+  NugetSource: https://www.myget.org/F/valhalla/api/v2/package
+
+jobs:
+  build:
+    runs-on: self-hosted
+
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Restore dependencies
+        run: dotnet restore
+
+      - name: Test
+        run: dotnet test -c ${{env.BuildConfiguration}} --no-restore -l GitHubActions
+
+      - name: Pack
+        run: dotnet pack -c ${{env.BuildConfiguration}} --no-restore PhoenixToolkits.Protobuf.ExtendTypes/PhoenixToolkits.Protobuf.ExtendTypes.csproj
+
+      - name: Upload a Build Artifact
+        uses: actions/upload-artifact@v2
+        with:
+          # Artifact name
+          name: nuget
+          # A file, directory or wildcard pattern that describes what to upload
+          path: PhoenixToolkits.Protobuf.ExtendTypes/bin/${{env.BuildConfiguration}}/*.nupkg
+
+  push-nuget-package:
+    runs-on: self-hosted
+    needs: build
+    steps:
+      - name: Download a Build Artifact
+        uses: actions/download-artifact@v2
+        with:
+          # Artifact name
+          name: nuget
+          # Destination path
+          path: nuget
+      - name: push
+        run: |
+          dotnet nuget push "nuget\*.nupkg" -s "$($env:NugetSource)" -k "${{ secrets.NUGETAPIKEY }}" --skip-duplicate
