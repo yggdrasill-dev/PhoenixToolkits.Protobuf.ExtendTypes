@@ -24,7 +24,7 @@ jobs:
         run: dotnet build -c ${{env.BuildConfiguration}} --no-restore
 
       - name: Test
-        run: dotnet test -c ${{env.BuildConfiguration}} --no-restore -l GitHubActions
+        run: dotnet test -c ${{env.BuildConfiguration}} --no-restore
 
       - name: Pack
         run: dotnet pack -c ${{env.BuildConfiguration}} --no-restore PhoenixToolkits.Protobuf.ExtendTypes/PhoenixToolkits.Protobuf.ExtendTypes.csproj
