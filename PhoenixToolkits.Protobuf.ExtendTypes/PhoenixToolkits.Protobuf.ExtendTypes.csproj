@@ -6,33 +6,36 @@
 		<Authors>Phoenix</Authors>
 		<Company>Valhalla</Company>
 		<Description>擴充定義Guid、decimal之類的型別方便使用</Description>
-		<Version>0.0.1-alpha</Version>
+		<Version>0.0.2-alpha</Version>
+		<PackageProjectUrl>https://github.com/yggdrasill-dev/PhoenixToolkits.Protobuf.ExtendTypes</PackageProjectUrl>
+		<Copyright />
+		<RepositoryUrl>https://github.com/yggdrasill-dev/PhoenixToolkits.Protobuf.ExtendTypes.git</RepositoryUrl>
+		<RepositoryType>git</RepositoryType>
+		<PackageTags>PhoenixToolkits Protobuf</PackageTags>
+		<Nullable>enable</Nullable>
 	</PropertyGroup>
 
 	<ItemGroup>
-		<Content Include="build\Grpc.Tools.props">
-			<Pack>true</Pack>
-			<PackagePath>build\</PackagePath>
-		</Content>
-		<Content Include="build\Grpc.Tools.targets">
-			<Pack>true</Pack>
-			<PackagePath>build\</PackagePath>
-		</Content>
-	</ItemGroup>
-
-	<ItemGroup>
-		<PackageReference Include="Google.Protobuf" Version="3.17.3" />
-		<PackageReference Include="Grpc.Tools" Version="2.38.1">
+		<PackageReference Include="Google.Protobuf" Version="3.18.0" />
+		<PackageReference Include="Grpc.Tools" Version="2.40.0">
 			<PrivateAssets>all</PrivateAssets>
 			<IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
 		</PackageReference>
 	</ItemGroup>
 
 	<ItemGroup>
-		<Content Include="Protos\wrappers.proto">
-			<PackagePath>build\native\include\phoenix\protobuf\</PackagePath>
-		</Content>
-		<Protobuf Include="Protos\wrappers.proto" GrpcServices="None" />
+	  <Protobuf Include="Protos\decimal.proto" GrpcServices="None" />
+	  <Protobuf Include="Protos\guid.proto" GrpcServices="None" />
+	</ItemGroup>
+
+	<ItemGroup Label="NuGet package assets">
+		<None Pack="true" PackagePath="build\" Include="build\**\*.xml; build\**\*.props; build\**\*.targets;" />
+
+		<!-- Protobuf assets (for Google.Protobuf.Tools) -->
+		<_ProtoAssetName Include="Protos\**\*.proto" />
+		<_Asset PackagePath="build/native/include/phoenix/protobuf/" Include="@(_ProtoAssetName->'$(Assets_ProtoInclude)%(Identity)')" />
+
+		<None Include="@(_Asset)" Pack="true" Visible="false" />
 	</ItemGroup>
 
 </Project>

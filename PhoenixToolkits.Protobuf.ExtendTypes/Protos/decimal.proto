@@ -4,10 +4,6 @@ package phoenix.protobuf;
 
 option csharp_namespace = "PhoenixToolkits.Protobuf.ExtendTypes";
 
-message GuidValue {
-  bytes value = 1;
-}
-
 message DecimalValue {
   // The whole units of the amount.
   int64 units = 1;
