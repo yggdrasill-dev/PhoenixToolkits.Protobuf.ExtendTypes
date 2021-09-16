@@ -8,7 +8,7 @@ on:
 
 env:
   BuildConfiguration: debug
-  NugetSource: https://www.myget.org/F/valhalla/api/v2/package
+  NugetSource: nuget.org
 
 jobs:
   build:
@@ -55,4 +55,4 @@ jobs:
           path: nuget
       - name: push
         run: |
-          dotnet nuget push "nuget\*.nupkg" -s "$($env:NugetSource)" -k "${{ secrets.NUGETAPIKEY }}" --skip-duplicate
+          dotnet nuget push "nuget\*.nupkg" -s "$($env:NugetSource)" -k "${{ secrets.PUBNUGETAPIKEY  }}" --skip-duplicate
