@@ -6,7 +6,7 @@
 		<Authors>Phoenix</Authors>
 		<Company>Valhalla</Company>
 		<Description>擴充定義Guid、decimal之類的型別方便使用</Description>
-		<Version>0.0.2-alpha</Version>
+		<Version>0.0.3</Version>
 		<PackageProjectUrl>https://github.com/yggdrasill-dev/PhoenixToolkits.Protobuf.ExtendTypes</PackageProjectUrl>
 		<Copyright />
 		<RepositoryUrl>https://github.com/yggdrasill-dev/PhoenixToolkits.Protobuf.ExtendTypes.git</RepositoryUrl>
@@ -17,19 +17,21 @@
 
 	<ItemGroup>
 		<PackageReference Include="Google.Protobuf" Version="3.18.0" />
-		<PackageReference Include="Grpc.Tools" Version="2.40.0">
+		<PackageReference Include="Grpc.Tools" Version="2.41.0">
 			<PrivateAssets>all</PrivateAssets>
-			<IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+			<IncludeAssets></IncludeAssets>
 		</PackageReference>
 	</ItemGroup>
 
 	<ItemGroup>
-	  <Protobuf Include="Protos\decimal.proto" GrpcServices="None" />
-	  <Protobuf Include="Protos\guid.proto" GrpcServices="None" />
+		<Protobuf Include="Protos\decimal.proto" GrpcServices="None" />
+		<Protobuf Include="Protos\guid.proto" GrpcServices="None" />
 	</ItemGroup>
 
 	<ItemGroup Label="NuGet package assets">
-		<None Pack="true" PackagePath="build\" Include="build\**\*.xml; build\**\*.props; build\**\*.targets;" />
+		<None Pack="true" PackagePath="build\$(PackageId).props" Include="build\main.props" />
+		<None Pack="true" PackagePath="build\$(PackageId).targets" Include="build\main.targets" />
+		<None Pack="true" PackagePath="build\" Include="build\**\*.xml; build\**\*.props; build\**\*.targets;" Exclude="build\main.props;build\main.targets" />
 
 		<!-- Protobuf assets (for Google.Protobuf.Tools) -->
 		<_ProtoAssetName Include="Protos\**\*.proto" />
