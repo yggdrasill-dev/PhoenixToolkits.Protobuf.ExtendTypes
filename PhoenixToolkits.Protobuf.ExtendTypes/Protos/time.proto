@@ -1,0 +1,9 @@
+﻿syntax = "proto3";
+
+package phoenix.protobuf;
+
+option csharp_namespace = "PhoenixToolkits.Protobuf.ExtendTypes";
+
+message TimeValue {
+  int64 ticks = 1;
+}

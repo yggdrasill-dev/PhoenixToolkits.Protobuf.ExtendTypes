@@ -1,4 +1,3 @@
-using System;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace PhoenixToolkits.Protobuf.ExtendTypes.Tests;
@@ -65,6 +64,67 @@ public class TypeTests
 		var expected = Guid.NewGuid();
 
 		var actual = GuidValue.FromGuid(expected).ToGuid();
+
+		Assert.AreEqual(expected, actual);
+	}
+
+	[TestMethod]
+	public void DateOnly_Assign()
+	{
+		var expected = DateOnly.FromDateTime(DateTime.Now);
+
+		var value = (DateValue)expected;
+		var actual = value.ToDateOnly();
+
+		Assert.AreEqual(expected, actual);
+	}
+
+	[TestMethod]
+	public void Nullable_DateOnly_Assign()
+	{
+		var value = (DateValue?)null;
+
+		DateOnly? actual = value;
+
+		Assert.IsNull(actual);
+	}
+
+	public void DateOnly_Serialize()
+	{
+		var expected = DateOnly.FromDateTime(DateTime.Now);
+
+		var actual = DateValue.FromDateOnly(expected).ToDateOnly();
+
+		Assert.AreEqual(expected, actual);
+	}
+
+	[TestMethod]
+	public void TimeOnly_Assign()
+	{
+		var expected = TimeOnly.FromDateTime(DateTime.Now);
+
+		var value = (TimeValue)expected;
+		var actual = value.ToTimeOnly();
+
+		Assert.AreEqual(expected, actual);
+	}
+
+	[TestMethod]
+	public void Nullable_TimeOnly_Assign()
+	{
+		var value = (TimeValue?)null;
+
+		TimeOnly? actual = value;
+
+		Assert.IsNull(actual);
+	}
+
+	[TestMethod]
+	public void TimeOnly_Serialize()
+	{
+		var expected = TimeOnly.FromDateTime(DateTime.Now);
+
+		var actual = TimeValue.FromTimeOnly(expected).ToTimeOnly();
 
 		Assert.AreEqual(expected, actual);
 	}
