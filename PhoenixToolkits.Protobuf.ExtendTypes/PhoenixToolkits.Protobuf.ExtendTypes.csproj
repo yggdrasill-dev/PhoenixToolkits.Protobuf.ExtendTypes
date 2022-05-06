@@ -6,7 +6,7 @@
 		<Authors>Phoenix</Authors>
 		<Company>Valhalla</Company>
 		<Description>擴充定義Guid、decimal之類的型別方便使用</Description>
-		<Version>0.0.5</Version>
+		<Version>0.0.6</Version>
 		<PackageProjectUrl>https://github.com/yggdrasill-dev/PhoenixToolkits.Protobuf.ExtendTypes</PackageProjectUrl>
 		<Copyright />
 		<RepositoryUrl>https://github.com/yggdrasill-dev/PhoenixToolkits.Protobuf.ExtendTypes.git</RepositoryUrl>
@@ -39,10 +39,6 @@
 
 		<!-- Protobuf assets (for Google.Protobuf.Tools) -->
 		<_ProtoAssetName Include="Protos\**\*.proto" />
-		<None Remove="Protos\date.proto" />
-		<None Remove="Protos\time.proto" />
-		<_ProtoAssetName Remove="Protos\date.proto" />
-		<_ProtoAssetName Remove="Protos\time.proto" />
 		<_Asset PackagePath="build/native/include/phoenix/protobuf/" Include="@(_ProtoAssetName->'$(Assets_ProtoInclude)%(Identity)')" />
 
 		<None Include="@(_Asset)" Pack="true" Visible="false" />
