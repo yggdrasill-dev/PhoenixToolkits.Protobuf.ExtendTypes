@@ -7,7 +7,7 @@ public partial class TimeValue
 		Ticks = ticks;
 	}
 
-	public static TimeValue FromTimeOnly(TimeOnly value) => new TimeValue(value.Ticks);
+	public static TimeValue FromTimeOnly(TimeOnly value) => new(value.Ticks);
 
 	public static implicit operator TimeValue(TimeOnly value) => FromTimeOnly(value);
 

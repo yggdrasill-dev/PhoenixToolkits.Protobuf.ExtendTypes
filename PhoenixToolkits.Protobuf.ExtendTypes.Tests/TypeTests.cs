@@ -1,4 +1,4 @@
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace PhoenixToolkits.Protobuf.ExtendTypes.Tests;
 
@@ -89,6 +89,7 @@ public class TypeTests
 		Assert.IsNull(actual);
 	}
 
+	[TestMethod]
 	public void DateOnly_Serialize()
 	{
 		var expected = DateOnly.FromDateTime(DateTime.Now);
